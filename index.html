@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Happy Birthday Tulika ❄️💖 | A Gift From Dip</title>
+  
+  <!-- SEO & Social Sharing Metadata -->
+  <meta name="description" content="A romantic winter-night birthday gift crafted with all of Dip's love for his Tulika.">
+  <meta name="theme-color" content="#1a0f33">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Global Canvas for Snowfall & Particle Bursts -->
+  <canvas id="fxCanvas" aria-hidden="true"></canvas>
+
+  <!-- Ambient Audio Floating Controller -->
+  <div class="audio-control" id="audioControl" role="button" tabindex="0" aria-label="সঙ্গীত চালু বা বন্ধ করুন" title="Music on/off">
+    <div class="audio-icon-wrap">
+      <span class="music-icon" id="musicIcon">🎵</span>
+      <span class="music-note-pulse"></span>
+    </div>
+    <span class="audio-tooltip">মিউজিক চালু করো</span>
+  </div>
+  <audio id="bgMusic" loop preload="auto" src="images/music.mp3" autoplay></audio>
+
+  <!-- Hidden File Input for Custom Polaroid Uploads -->
+  <input type="file" id="polaroidFileInput" accept="image/*" style="display: none;" aria-hidden="true">
+
+  <!-- ========================================================= -->
+  <!-- 1. INTRO SCREEN: Cinematic Story (Cartoon Man & Woman)   -->
+  <!-- ========================================================= -->
+  <section class="intro-screen" id="introScreen">
+    
+    <!-- Skip Story Button -->
+    <button type="button" class="skip-story-btn" id="skipStoryBtn" title="সরাসরি চিঠি দেখুন">
+      চিঠি দেখুন ⏩
+    </button>
+
+    <div class="intro-container">
+      
+      <!-- Top Title -->
+      <div class="intro-header">
+        <div class="gift-from-badge">
+          <span>💌 From Dip with Love</span>
+        </div>
+        <h1 class="intro-name">Tulika</h1>
+        <p class="intro-bengali-line">আজ শুধু তোমার জন্য দীপের একটা চিঠি আছে ❄️</p>
+      </div>
+
+      <!-- ANIMATED CARTOON STORY STAGE (Walking on foot) -->
+      <div class="story-stage" id="storyStage">
+        
+        <!-- Cartoon Man (Dip) Walking in -->
+        <div class="cartoon-character cartoon-dip is-walking" id="cartoonDip">
+          
+          <!-- Speech Bubble -->
+          <div class="speech-bubble bubble-dip hidden" id="bubbleDip">
+            <span class="bubble-text" id="bubbleDipText">Happy Birthday, আমার বেবি! 🎂💖</span>
+          </div>
+
+          <!-- SVG Figure -->
+          <div class="character-figure">
+            <svg class="char-svg" viewBox="0 0 80 130" width="80" height="130" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="40" cy="126" rx="22" ry="4" fill="rgba(0,0,0,0.3)" class="char-shadow" />
+              <!-- Left Leg -->
+              <g class="leg leg-left">
+                <rect x="28" y="85" width="8" height="36" rx="4" fill="#1f2937" />
+                <ellipse cx="32" cy="122" rx="7" ry="4" fill="#111827" />
+              </g>
+              <!-- Right Leg -->
+              <g class="leg leg-right">
+                <rect x="44" y="85" width="8" height="36" rx="4" fill="#2d3748" />
+                <ellipse cx="48" cy="122" rx="7" ry="4" fill="#111827" />
+              </g>
+              <!-- Torso & Coat -->
+              <g class="torso">
+                <rect x="25" y="48" width="30" height="42" rx="8" fill="#2c3e50" />
+                <path d="M35 48 L40 60 L45 48 Z" fill="#e74c3c" />
+                <line x1="40" y1="60" x2="40" y2="90" stroke="#f6c66f" stroke-width="2" />
+                <!-- Left Arm -->
+                <g class="arm arm-left">
+                  <rect x="18" y="50" width="8" height="28" rx="4" fill="#243342" />
+                  <circle cx="22" cy="80" r="5" fill="#fcd3b8" />
+                </g>
+                <!-- Right Arm holding love letter -->
+                <g class="arm arm-right">
+                  <rect x="54" y="50" width="8" height="28" rx="4" fill="#243342" />
+                  <circle cx="58" cy="80" r="5" fill="#fcd3b8" />
+                  <g class="gift-letter" id="handLetter">
+                    <rect x="54" y="74" width="16" height="12" rx="2" fill="#fff" stroke="#ff7aa8" stroke-width="1.2" />
+                    <path d="M54 74 L62 81 L70 74" fill="none" stroke="#ff7aa8" stroke-width="1.2" />
+                    <circle cx="62" cy="80" r="2.5" fill="#e74c3c" />
+                  </g>
+                </g>
+              </g>
+              <!-- Head Group -->
+              <g class="head">
+                <rect x="36" y="40" width="8" height="10" fill="#fcd3b8" />
+                <ellipse cx="40" cy="28" rx="18" ry="17" fill="#fcd3b8" />
+                <circle cx="22" cy="28" r="4" fill="#fcd3b8" />
+                <circle cx="58" cy="28" r="4" fill="#fcd3b8" />
+                <!-- Hair -->
+                <path d="M22 26 C22 10 30 6 40 6 C50 6 58 10 58 26 C54 18 48 16 40 18 C32 16 26 19 22 26 Z" fill="#1a1a1a" />
+                <!-- Glasses (Dip's signature look) -->
+                <g class="glasses" stroke="#111827" stroke-width="2" fill="none">
+                  <rect x="27" y="21" width="10" height="9" rx="2" stroke="#111827" fill="rgba(255,255,255,0.2)" />
+                  <rect x="43" y="21" width="10" height="9" rx="2" stroke="#111827" fill="rgba(255,255,255,0.2)" />
+                  <line x1="37" y1="25" x2="43" y2="25" />
+                  <line x1="22" y1="24" x2="27" y2="24" />
+                  <line x1="53" y1="24" x2="58" y2="24" />
+                </g>
+                <!-- Eyes behind glasses -->
+                <circle cx="32" cy="25" r="2" fill="#111827" />
+                <circle cx="48" cy="25" r="2" fill="#111827" />
+                <!-- Smile -->
+                <path d="M36 34 Q40 38 44 34" stroke="#c0392b" stroke-width="2" stroke-linecap="round" fill="none" />
+              </g>
+            </svg>
+          </div>
+          <span class="char-label">Dip 👑</span>
+        </div>
+
+        <!-- Floating Connection Heart between them -->
+        <div class="story-heart-connector hidden" id="storyHeart">
+          <span>💞</span>
+        </div>
+
+        <!-- Cartoon Woman (Tulika) Walking in -->
+        <div class="cartoon-character cartoon-tulika is-walking" id="cartoonTulika">
+          
+          <!-- Speech Bubble -->
+          <div class="speech-bubble bubble-tulika hidden" id="bubbleTulika">
+            <span class="bubble-text" id="bubbleTulikaText">Thank you so much, আমার দীপ! 🥰🌸</span>
+          </div>
+
+          <!-- SVG Figure -->
+          <div class="character-figure">
+            <svg class="char-svg" viewBox="0 0 80 130" width="80" height="130" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="40" cy="126" rx="20" ry="4" fill="rgba(0,0,0,0.3)" class="char-shadow" />
+              <!-- Left Leg -->
+              <g class="leg leg-left">
+                <rect x="30" y="88" width="6" height="33" rx="3" fill="#fcd3b8" />
+                <ellipse cx="32" cy="122" rx="6" ry="3.5" fill="#ff7aa8" />
+              </g>
+              <!-- Right Leg -->
+              <g class="leg leg-right">
+                <rect x="44" y="88" width="6" height="33" rx="3" fill="#fcd3b8" />
+                <ellipse cx="46" cy="122" rx="6" ry="3.5" fill="#ff7aa8" />
+              </g>
+              <!-- Flared Rose Dress -->
+              <g class="torso">
+                <path d="M30 68 L19 92 L61 92 L50 68 Z" fill="#d6336c" />
+                <path d="M19 92 Q30 96 40 92 Q50 96 61 92" stroke="#fff" stroke-width="2" fill="none" />
+                <rect x="28" y="48" width="24" height="22" rx="5" fill="#ff7aa8" />
+                <path d="M35 48 Q40 54 45 48" stroke="#f6c66f" stroke-width="2" fill="none" />
+                <!-- Arms -->
+                <g class="arm arm-left">
+                  <rect x="20" y="50" width="6" height="26" rx="3" fill="#fcd3b8" />
+                </g>
+                <g class="arm arm-right">
+                  <rect x="54" y="50" width="6" height="26" rx="3" fill="#fcd3b8" />
+                </g>
+              </g>
+              <!-- Hair Behind -->
+              <path d="M22 28 C16 48 18 68 20 80 C24 82 28 80 28 72 C28 50 25 36 28 28 Z" fill="#2d132c" />
+              <path d="M58 28 C64 48 62 68 60 80 C56 82 52 80 52 72 C52 50 55 36 52 28 Z" fill="#2d132c" />
+              <!-- Head Group -->
+              <g class="head">
+                <rect x="37" y="41" width="6" height="9" fill="#fcd3b8" />
+                <ellipse cx="40" cy="28" rx="17" ry="16" fill="#fcd3b8" />
+                <circle cx="23" cy="28" r="3.5" fill="#fcd3b8" />
+                <circle cx="57" cy="28" r="3.5" fill="#fcd3b8" />
+                <!-- Jhumka Earrings -->
+                <circle cx="22" cy="34" r="2" fill="#f6c66f" />
+                <circle cx="58" cy="34" r="2" fill="#f6c66f" />
+                <!-- Hair Front -->
+                <path d="M23 25 C23 10 30 6 40 6 C50 6 57 10 57 25 C52 18 46 16 40 18 C33 16 27 19 23 25 Z" fill="#2d132c" />
+                <!-- Flower in Hair -->
+                <circle cx="54" cy="14" r="5" fill="#ff7aa8" />
+                <circle cx="54" cy="14" r="2" fill="#f6c66f" />
+                <!-- Anime Eyes -->
+                <ellipse cx="32" cy="24" rx="3.5" ry="4.5" fill="#2d132c" />
+                <circle cx="31" cy="22.5" r="1.5" fill="#fff" />
+                <ellipse cx="48" cy="24" rx="3.5" ry="4.5" fill="#2d132c" />
+                <circle cx="47" cy="22.5" r="1.5" fill="#fff" />
+                <!-- Blushing Cheeks -->
+                <ellipse cx="28" cy="30" rx="4" ry="2.5" fill="rgba(255, 107, 149, 0.6)" />
+                <ellipse cx="52" cy="30" rx="4" ry="2.5" fill="rgba(255, 107, 149, 0.6)" />
+                <!-- Sweet Smile -->
+                <path d="M36 33 Q40 37 44 33" stroke="#e84393" stroke-width="2" stroke-linecap="round" fill="none" />
+              </g>
+            </svg>
+          </div>
+          <span class="char-label">Tulika 🌸</span>
+        </div>
+
+      </div> <!-- /story-stage -->
+
+      <!-- CSS 3D ENVELOPE CARD (Appears during story handoff) -->
+      <div class="envelope-scene hidden" id="envelopeScene">
+        <div class="envelope" id="envelopeCard" role="button" tabindex="0" aria-label="খাম খুলে চিঠিটি পড়ুন">
+          
+          <!-- Back Interior & Letter preview inside -->
+          <div class="envelope-back"></div>
+          <div class="envelope-paper-peek"></div>
+
+          <!-- Bottom & Side Pockets -->
+          <div class="envelope-pocket"></div>
+
+          <!-- Top Foldable Flap with 3D Flip -->
+          <div class="envelope-flap" id="envelopeFlap">
+            <div class="flap-triangle"></div>
+          </div>
+
+          <!-- Golden Wax Seal with Heart -->
+          <div class="wax-seal" id="waxSeal">
+            <span class="seal-heart">💖</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Pulsing Hint -->
+      <div class="envelope-hint hidden" id="envelopeHint">
+        <span class="hint-finger">👆</span>
+        <span class="hint-text">খামটা ছুঁয়ে চিঠিটা খোলো, আমার বেবি 💖</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 2. THE LETTER: Cream Paper Unfolding           -->
+  <!-- ============================================== -->
+  <main class="letter-wrapper hidden" id="letterWrapper">
+    <article class="letter-paper" id="letterPaper">
+      
+      <!-- Inner Dashed Rose Border container -->
+      <div class="letter-inner">
+
+        <!-- Top Delicate Stamp & Sparkle -->
+        <div class="letter-stamp-row">
+          <span class="letter-stamp">💌 FROM DIP TO TULIKA</span>
+          <span class="letter-date">আমাদের ভালোবাসার প্রতিটা ক্ষণ</span>
+        </div>
+
+        <!-- Heading & Subtitle -->
+        <header class="letter-header fade-up">
+          <h2 class="letter-title">Happy Birthday, Tulika</h2>
+          <p class="letter-subtitle">শুভ জন্মদিন, আমার প্রাণ 🎂</p>
+          <div class="floral-divider">❦ ❄️ ❦</div>
+        </header>
+
+        <!-- TWO POLAROID PHOTOS -->
+        <section class="polaroids-section fade-up" aria-label="আমাদের প্রিয় ছবি দুটি">
+          <div class="polaroids-grid">
+            
+            <!-- Polaroid 1: তুমি 🌸 -->
+            <div class="polaroid-card polaroid-left" id="polaroidTulika" tabindex="0" role="button" aria-label="তুলিকার ছবি। ট্যাপ করে ছবি পরিবর্তন করতে পারো">
+              <div class="washi-tape washi-gold"></div>
+              <div class="polaroid-img-box">
+                <img src="images/tulika.jpg" alt="আমার তুলিকা" class="polaroid-img" id="imgTulika" onerror="this.onerror=null; this.src='images/tulika_fairylights.jpg';">
+                <div class="polaroid-placeholder" aria-hidden="true">
+                  <span class="camera-icon">📷</span>
+                </div>
+                <button type="button" class="polaroid-action-btn" title="ছবি পরিবর্তন করুন" aria-label="ছবি পরিবর্তন">
+                  📷 পরিবর্তন
+                </button>
+              </div>
+              <p class="polaroid-caption">আমার বেবি 🌸</p>
+            </div>
+
+            <!-- Polaroid 2: আমরা 💞 -->
+            <div class="polaroid-card polaroid-right" id="polaroidUs" tabindex="0" role="button" aria-label="আমাদের দুজনের ছবি। ট্যাপ করে ছবি পরিবর্তন করতে পারো">
+              <div class="washi-tape washi-rose"></div>
+              <div class="polaroid-img-box">
+                <img src="images/us.jpg" alt="তুলিকা ও দীপ" class="polaroid-img" id="imgUs" onerror="this.onerror=null; this.src='images/us_sweet.jpg';">
+                <div class="polaroid-placeholder" aria-hidden="true">
+                  <span class="camera-icon">📷</span>
+                </div>
+                <button type="button" class="polaroid-action-btn" title="ছবি পরিবর্তন করুন" aria-label="ছবি পরিবর্তন">
+                  📷 পরিবর্তন
+                </button>
+              </div>
+              <p class="polaroid-caption">তুলিকা ও দীপ 💞</p>
+            </div>
+
+          </div>
+          <p class="polaroids-tip">💡 যেকোনো ছবিতে ট্যাপ করে গ্যালারি থেকে নতুন ছবি বেছে নিতে পারো</p>
+        </section>
+
+        <!-- ROMANTIC MESSAGE PARAGRAPHS FROM DIP -->
+        <section class="letter-message" aria-label="ভালোবাসার বার্তা">
+          
+          <p class="letter-p fade-up">
+            আমার বেবি, আজ তোমার দিন। কিন্তু সত্যি বলতে, তুমি আমার জন্য <strong class="highlight-pink">প্রতিটা দিনই</strong> বিশেষ করে তোলো।
+          </p>
+
+          <p class="letter-p fade-up">
+            প্রায় <strong class="highlight-pink">৫ বছর</strong> ধরে আমরা একসাথে। এই শীতেই প্রথম তোমার সাথে দেখা হয়েছিল। আমার জীবনের সবচেয়ে সুন্দর মুহূর্ত ওটাই। শীতের কুয়াশা সরিয়ে তুমি এলে, আর আমার পুরো জীবনটা উষ্ণ হয়ে গেল।
+          </p>
+
+          <p class="letter-p fade-up">
+            আমি যখন যা বলেছি, তুমি তাই করেছো। কত ছোট ছোট ত্যাগ, কত চুপচাপ মানিয়ে নেওয়া। আমি সব মনে রাখি, বেবি। আমার ছোট ছোট কথাতেও তোমার <strong class="highlight-pink">হার্ট</strong> ছুঁয়ে যায়, এটাই আমার সবচেয়ে বড় পাওয়া।
+          </p>
+
+          <p class="letter-p fade-up">
+            তুমি যেভাবে আমাকে ভালোবাসো, আমার মনে হয় আর কেউ কোনোদিন বাসতে পারবে না। এই ভালোবাসার ধরনটা <strong class="highlight-pink">সবসময়</strong> আমার জন্য রেখো, বেবি। তোমার এই ভালোবাসার দীপ (Dip) হয়েই আমি বেঁচে থাকি।
+          </p>
+
+        </section>
+
+        <!-- SECTION: Tulika-র জন্য দীপের A to Z -->
+        <section class="atoz-section" aria-label="তুলিকার জন্য এ টু জেড">
+          <div class="section-title-wrap fade-up">
+            <span class="sub-badge">দীপের হৃদয়ের কথামালা</span>
+            <h3 class="atoz-heading">Tulika-র জন্য দীপের A to Z</h3>
+          </div>
+
+          <div class="atoz-grid">
+            
+            <div class="atoz-card slide-left" style="--delay: 0.05s;">
+              <span class="atoz-letter">T</span>
+              <div class="atoz-content">
+                <p class="atoz-text">তুমি আমার শান্তি, আমার ঘর।</p>
+              </div>
+            </div>
+
+            <div class="atoz-card slide-left" style="--delay: 0.15s;">
+              <span class="atoz-letter">U</span>
+              <div class="atoz-content">
+                <p class="atoz-text">উষ্ণতা তুমি, শীতের সকালের রোদের মতো।</p>
+              </div>
+            </div>
+
+            <div class="atoz-card slide-left" style="--delay: 0.25s;">
+              <span class="atoz-letter">L</span>
+              <div class="atoz-content">
+                <p class="atoz-text">লক্ষ্মী মেয়ে, আমার সব এলোমেলোকে গুছিয়ে দাও।</p>
+              </div>
+            </div>
+
+            <div class="atoz-card slide-left" style="--delay: 0.35s;">
+              <span class="atoz-letter">I</span>
+              <div class="atoz-content">
+                <p class="atoz-text">ইচ্ছে করে প্রতিটা জন্মে শুধু তোমাকেই পাই।</p>
+              </div>
+            </div>
+
+            <div class="atoz-card slide-left" style="--delay: 0.45s;">
+              <span class="atoz-letter">K</span>
+              <div class="atoz-content">
+                <p class="atoz-text">কখনো ছেড়ো না আমার হাতটা, আমিও ছাড়বো না।</p>
+              </div>
+            </div>
+
+            <div class="atoz-card slide-left" style="--delay: 0.55s;">
+              <span class="atoz-letter">A</span>
+              <div class="atoz-content">
+                <p class="atoz-text">আমার সবকিছু, আমার শুরু আর আমার শেষ।</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- INTERACTIVE SECTION 1: LOVE METER FOR DIP      -->
+        <!-- ============================================== -->
+        <section class="love-meter-section fade-up" aria-label="লাভ মিটার">
+          <div class="section-title-wrap">
+            <span class="sub-badge">ইন্টারঅ্যাক্টিভ খেলা</span>
+            <h3 class="section-subheading">তোমার এই দীপকে কতটা ভালোবাসো, বেবি? ❤️</h3>
+            <p class="section-desc">বারটা টেনে দীপকে বলো তোমার ভালোবাসার পরিমাণ কত!</p>
+          </div>
+
+          <div class="love-meter-box">
+            <div class="meter-score-display">
+              <span class="meter-emoji" id="meterEmoji">🥺</span>
+              <span class="meter-percentage" id="meterPercent">0%</span>
+            </div>
+
+            <div class="meter-slider-container">
+              <input type="range" min="0" max="100" value="0" id="loveSlider" class="love-slider" aria-label="ভালোবাসার স্লাইডার">
+              <div class="slider-track-fill" id="sliderFill" style="width: 0%;"></div>
+            </div>
+
+            <p class="meter-reaction" id="meterReaction">
+              এইটুকুও না? ০%? স্লাইডারটা টেনে বাড়াও বেবি, তোমার দীপ অপেক্ষা করছে! 🥺💔
+            </p>
+
+            <button type="button" class="meter-lock-btn" id="lockLoveBtn">
+              💖 দীপের জন্য ভালোবাসা লক করো 🔒
+            </button>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- INTERACTIVE SECTION 2: ROMANTIC MINI QUIZ      -->
+        <!-- ============================================== -->
+        <section class="quiz-section fade-up" aria-label="মিষ্টি প্রেমের প্রশ্নমালা">
+          <div class="section-title-wrap">
+            <span class="sub-badge">দীপের প্রশ্নমালা</span>
+            <h3 class="section-subheading">আমাদের কিছু মিষ্টি প্রশ্ন 💌</h3>
+            <p class="section-desc">সঠিক অপশনটি বেছে নিয়ে দেখো দীপের উত্তর!</p>
+          </div>
+
+          <div class="quiz-container">
+
+            <!-- Question 1 -->
+            <div class="quiz-card" data-quiz="1">
+              <p class="quiz-q">১. আমাদের দুজনের মধ্যে কে সবচেয়ে বেশি ভালোবাসে? 🤔</p>
+              <div class="quiz-options">
+                <button type="button" class="quiz-opt" data-ans="1">🌸 আমি (তুলিকা)</button>
+                <button type="button" class="quiz-opt" data-ans="2">👑 তুমি (আমার দীপ)</button>
+                <button type="button" class="quiz-opt" data-ans="3">💞 আমরা দুজন সমান সমান</button>
+              </div>
+              <div class="quiz-feedback hidden"></div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="quiz-card" data-quiz="2">
+              <p class="quiz-q">২. শীতের সন্ধ্যায় দীপের সাথে তোমার কাছে প্রিয় মুহূর্ত কোনটি? ❄️</p>
+              <div class="quiz-options">
+                <button type="button" class="quiz-opt" data-ans="1">☕ তোমার সাথে এক কাপ গরম কফি</button>
+                <button type="button" class="quiz-opt" data-ans="2">🤝 তোমার হাত ধরে হেঁটে চলা</button>
+                <button type="button" class="quiz-opt" data-ans="3">🥰 দীপের কাঁধে মাথা রেখে রিল্যাক্স করা</button>
+              </div>
+              <div class="quiz-feedback hidden"></div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-card" data-quiz="3">
+              <p class="quiz-q">৩. আজকের জন্মদিনে দীপের কাছে তোমার স্পেশাল আবদার কী? 🎁</p>
+              <div class="quiz-options">
+                <button type="button" class="quiz-opt" data-ans="1">💍 সারাজীবন দীপের পাশে থাকা</button>
+                <button type="button" class="quiz-opt" data-ans="2">🌸 সবসময় তোমার মিষ্টি হাসি</button>
+                <button type="button" class="quiz-opt" data-ans="3">💖 উপরের সবগুলোই চাই!</button>
+              </div>
+              <div class="quiz-feedback hidden"></div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- INTERACTIVE SECTION 3: ROMANTIC COUPONS        -->
+        <!-- ============================================== -->
+        <section class="coupons-section fade-up" aria-label="তুলিকার গিফট কুপন">
+          <div class="section-title-wrap">
+            <span class="sub-badge">দীপের স্পেশাল উপহার</span>
+            <h3 class="section-subheading">আমার বেবির জন্য দীপের লাইফটাইম কুপন 🎟️</h3>
+            <p class="section-desc">যেকোনো কুপন ছুঁয়ে দীপের কাছ থেকে এখনই ক্লেইম করে নাও!</p>
+          </div>
+
+          <div class="coupons-grid">
+            <div class="coupon-card" tabindex="0" role="button">
+              <div class="coupon-badge">FREE</div>
+              <div class="coupon-icon">🫂</div>
+              <h4 class="coupon-title">আনলিমিটেড হাগ ও আদর</h4>
+              <p class="coupon-detail">মন খারাপ হোক বা ভালো, দীপের কাছ থেকে যতবার ইচ্ছা চেয়ে নিও।</p>
+              <button type="button" class="coupon-claim-btn">রিডিম করো ✨</button>
+            </div>
+
+            <div class="coupon-card" tabindex="0" role="button">
+              <div class="coupon-badge">VIP</div>
+              <div class="coupon-icon">🍫</div>
+              <h4 class="coupon-title">ইনস্ট্যান্ট রাগ ভাঙানো</h4>
+              <p class="coupon-detail">দীপের গ্যারান্টি! এক নিমেষে পছন্দের খাবার আর ভালোবাসায় মান ভাঙানো।</p>
+              <button type="button" class="coupon-claim-btn">রিডিম করো ✨</button>
+            </div>
+
+            <div class="coupon-card" tabindex="0" role="button">
+              <div class="coupon-badge">SPECIAL</div>
+              <div class="coupon-icon">🌟</div>
+              <h4 class="coupon-title">যেকোনো একটি ইচ্ছে পূরণ</h4>
+              <p class="coupon-detail">দীপের কাছে যেকোনো আবদার — তুমি যা বলবে বেবি, দীপ তাই মেনে নেবে।</p>
+              <button type="button" class="coupon-claim-btn">রিডিম করো ✨</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- CREATIVE MEMORIES SCRAPBOOK (Featuring all 11 real uploaded photos!) -->
+        <section class="memories-section" aria-label="আমাদের সোনালী মুহূর্তগুলো">
+          <div class="section-title-wrap fade-up">
+            <span class="sub-badge">তুলিকা ও দীপের অ্যালবাম</span>
+            <h3 class="memories-heading">আমাদের ৫ বছরের কিছু সোনালী মুহূর্ত 📸</h3>
+            <p class="memories-subtitle">প্রতিটা ছবির পেছনে জমে আছে এক বুক ভালোবাসা</p>
+          </div>
+
+          <div class="memories-album-scroll">
+            <div class="memories-album-track">
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/tulika_fairylights.jpg" alt="আলোর ঝলকে তুলিকা" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">আলোর মতো উজ্জ্বল তুমি ✨</span>
+              </div>
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/us_sweet.jpg" alt="আমাদের মিষ্টি মুহূর্ত" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">দীপের কাঁধে সব ক্লান্তি দূর 💞</span>
+              </div>
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/tulika_festive.jpg" alt="উৎসবের সাজে তুলিকা" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">তোমার সেই মিষ্টি হাসি 🌸</span>
+              </div>
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/us_romantic_tree.jpg" alt="ঐতিহ্যবাহী পোশাকে আমরা" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">শুধু তোমার চোখে চোখ রেখে 💑</span>
+              </div>
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/tulika_pink.jpg" alt="গোলাপি সাজে তুলিকা" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">দীপের রূপবতী রাজকন্যা 💖</span>
+              </div>
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/us_red_outfit.jpg" alt="লাল রঙে আমরা দুজন" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">একসাথে কাটানো ভালোবাসার দিন ❤️</span>
+              </div>
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/tulika_blue.jpg" alt="নীল কুর্তিতে তুলিকা" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">দীপের মনের নীল পরী 💙</span>
+              </div>
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/us_cafe.jpg" alt="ক্যাফেতে দুজন" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">ছোট ছোট আড্ডা আর স্মৃতি ☕</span>
+              </div>
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/tulika_durga.jpg" alt="পূজোর সাজে তুলিকা" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">শারদীয়ার সবচেয়ে সুন্দর রূপ 🌺</span>
+              </div>
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/us_festival.jpg" alt="পূজোর দিনে আমরা" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">সব পূজোতেই তুমি আমার প্রার্থনা 🪔</span>
+              </div>
+
+              <div class="memory-scrapbook-card fade-up" tabindex="0" role="button" aria-label="ছবি বড় করে দেখুন">
+                <div class="scrapbook-tape tape-top"></div>
+                <img src="images/us_smile.jpg" alt="হাসিমুখে আমরা দুজন" class="scrapbook-photo" loading="lazy">
+                <span class="scrapbook-caption">চিরকাল এই হাসিটা চাই 🥰</span>
+              </div>
+
+            </div>
+          </div>
+          <p class="memories-scroll-hint">👈 স্ক্রোল করে আরও ছবি দেখো • ছবিতে ট্যাপ করো 👉</p>
+        </section>
+
+        <!-- CLOSING PARAGRAPH -->
+        <section class="letter-closing fade-up">
+          <p class="letter-p closing-text">
+            তুমি থাকবে, সবসময়, সব সময়ের জন্য। আর তোমার এই দীপ থাকবে তোমার পাশে, প্রতিটা শীতে, প্রতিটা বসন্তে। আজকের দিনে আমার একটাই চাওয়া: তুমি সবসময় হাসো, আর সেই হাসির কারণটা যেন আমি হই।
+          </p>
+        </section>
+
+        <!-- BIRTHDAY CAKE & INTERACTIVE CANDLE -->
+        <section class="cake-section fade-up" aria-label="জন্মদিনের কেক">
+          <div class="cake-box" id="cakeBox" role="button" tabindex="0" aria-label="কেকের মোমবাতিতে ফুঁ দিন">
+            
+            <!-- Candle Container with flickering flame -->
+            <div class="candle-wrap" id="candleWrap">
+              <div class="candle-flame" id="candleFlame" title="ফুঁ দিতে ট্যাপ করো">
+                <span class="flame-core"></span>
+                <span class="flame-glow"></span>
+              </div>
+              <div class="candle-smoke" id="candleSmoke"></div>
+              <div class="candle-wick"></div>
+              <div class="candle-body"></div>
+            </div>
+
+            <!-- Big Cake Illustration -->
+            <div class="cake-visual">
+              <div class="cake-icing">
+                <span class="icing-berry">🍓</span>
+                <span class="icing-berry">🍒</span>
+                <span class="icing-berry">🍓</span>
+                <span class="icing-berry">🍒</span>
+              </div>
+              <div class="cake-tier tier-top">
+                <div class="cream-drips"></div>
+              </div>
+              <div class="cake-tier tier-bottom">
+                <div class="cream-swirls"></div>
+              </div>
+              <div class="cake-stand"></div>
+            </div>
+
+            <!-- Wish text -->
+            <p class="cake-caption" id="cakeCaption">
+              মনে মনে একটা উইশ করো, তারপর ফুঁ দাও (কেকটা ছোঁও) ✨
+            </p>
+            <div class="cake-wished-badge hidden" id="wishedBadge">
+              🎉 উইশ পূরণ হোক, আমার বেবি! Happy Birthday! 💖
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SIGNATURE -->
+        <footer class="letter-signature-wrap fade-up">
+          <p class="signature-line" id="signatureDisplay">
+            ইতি, তোমার সবচেয়ে ভালোবাসার মানুষ — তোমার দীপ (Dip) 💕
+          </p>
+        </footer>
+
+        <!-- FINAL BUTTON: TULIKA'S REACTION TO DIP -->
+        <div class="final-action-wrap fade-up">
+          <button type="button" class="love-reaction-btn" id="loveBtn" aria-label="দীপকে ভালোবাসা জানান">
+            <span class="btn-heart-sparkle">💖</span>
+            <span class="btn-text">আমিও তোমায় খুব ভালোবাসি, দীপ! 💗</span>
+            <span class="btn-heart-sparkle">💖</span>
+          </button>
+        </div>
+
+      </div> <!-- /letter-inner -->
+    </article>
+  </main>
+
+  <!-- Romantic Lightbox Modal for Full-View Photos -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="ছবি বড় করে দেখুন">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-content">
+      <button type="button" class="lightbox-close-btn" id="lightboxClose" aria-label="বন্ধ করুন">✕</button>
+      <div class="lightbox-frame">
+        <img src="" alt="স্মৃতির মুহূর্ত" id="lightboxImg" class="lightbox-img">
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
